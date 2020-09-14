@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <script src="jquery-1.11.3.min.js" type='text/javascript'></script>
+    <script src="md5.js" type='text/javascript'></script>
+    <script type="text/javascript" src="js-xlsx-master/dist/xlsx.core.min.js"></script>
+
+    <title>Build Testcases</title>
+
+    <link rel="stylesheet" type="text/css" href="index20200907.css">
+</head>
+
+<body style='padding:0px;margin:0px'>
+    <div class='topbar1' id='divTopBar'>
+        <table>
+            <tr>
+                <td class='tdbutton M user' title='My Account'>User</td>
+                <td class='tdbutton M list' title='Refresh and display list'>List</td>
+                <td class='tdbutton M new' title='Add a new testcase'>New</td>
+                <td class='tdtitle' id='tdTitle'><input class='txttitle' type='text' value="" /></td>
+                <td class='tdbutton M status' title='Mark the status: Done / Inwork'>Inwork</td>
+                <td class='tdbutton M prerequisites' title='Show Prerequisites' data-selected=0>Prepaire</td>
+                <td class='tdbutton M steps' title='Show Steps' style="background: #707070;" data-selected=1>Steps</td>
+                <td class='tdbutton M save' title='Save'>Save</td>
+                <td class='tdbutton M more' title='Click to see more functions' style="position: relative;">
+                    ...
+                    <div class='divMore'>
+                        <table>
+                            <td class='tdbutton XM copy' title='Copy from ...'>Copy</td>
+                            <!--<td class='tdbutton preview'  title='Preview' data-selected=0 >Preview</td>-->
+                            <td class='tdbutton XM export' title='Export'>Export</td>
+                            <td class='tdbutton XM history' title='History'>History</td>
+                            <td class='tdbutton XM smart' title='Smart Input'>Smart</td>
+                            <td class='tdbutton XM story' title='Input Story'>Story</td>
+                            <td class='tdbutton XM closemore' title='Close this menu'>x</td>
+                        </table>
+                    </div>
+                </td>
+                <td class='tdbutton M refresh-list listonly' title='Refresh List'>Refresh</td>
+                <td class='tdbutton M copy-list listonly' title='Copy the selected'>Copy</td>
+                <td class='tdbutton M columns-list listonly' title='Fit columns width'>Fit.Col</td>
+                <td class='tdbutton M search-list listonly' title='Search and Column settings'>S & C</td>
+                <td class='tdbutton M export-list listonly' title='Export the selected'>Export</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class='divcopy' id='div_copy'>
+        <div>
+            <div>
+                <div>Copy from:</div>
+                <div style="padding:5px">
+                    <select id='sel_copy_idxs' size=15></select><br/>
+                    <input class='txtfilter_copy' type='text' value="" title="Filter the options" />
+                </div>
+            </div>
+            <div style="padding:5px" align="center">
+                <table>
+                    <tr>
+                        <td class='tdbutton go' title='Copy'>Copy</td>
+                        <td style="width:50px">&nbsp;</td>
+                        <td class='tdbutton append' title='Copy'>Append</td>
+                        <td style="width:50px">&nbsp;</td>
+                        <td class='tdbutton cancel' title='Cancel'>X</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div style='padding:5px;color:#707070;background:yellow'>
+            <a style='font-weight: bold;'>Copy</a>:
+            <a style='color:red'>Delete</a> all steps in the current Testcase, then
+            <a style='color:red'>copy</a> everything from the selected.
+        </div>
+        <div style='padding:5px;color:#707070;background:yellow'>
+            <a style='font-weight: bold;'>Append</a>:
+            <a style='color:red'>Keep</a> all steps in the current Testcase, then
+            <a style='color:red'>copy</a> all steps only from the selected and append them to the end of this Testcase.
+        </div>
+    </div>
+
+    <div class='divsmart' id='div_smart' data-smarton=1></div>
+
+    <div class='divcontent' id='divList'>
+        <div id='divList_filter' style='padding:5px 5px 0px 5px;overflow: hidden;'>
+            <div>
+                <table>
+                    <thead>                        
+                        <tr class='search'>                            
+                            <td class='tdlistsearch' colspan='11'>
+                                <div class='divsearch'>
+                                    <div class='title' style='padding:5px;background:#F0F0F0;'>Search & Column Setting</div>
+                                    <div class='content' style='padding:5px;'>
+                                        <table>
+                                            <tbody class='search'>                                                
+                                                <tr class='condition fixed'>
+                                                    <td class='tdsearch'>
+                                                        <select class='selectsearch logic groupstart'>
+                                                                <option value=''>&nbsp;</option>
+                                                                <option value='('>(</option>
+                                                            </select>
+                                                    </td>
+
+                                                    <td class='tdsearch'>
+                                                        <select class='selectsearch field fixed'>
+                                                                <option value='created_by'>Created By</option>
+                                                                <option value='idx'>ID</option>
+                                                                <option value='name'>Name</option>
+                                                                <option value='status'>Status</option>                                                        
+                                                                <option value='updated_by'>Updated By</option>
+                                                                <option value='updated_when'>Updated Date</option>
+                                                            </select>
+                                                    </td>
+                                                    <td class='tdsearch'>
+                                                        <select class='selectsearch logic x fixed'>
+                                                                <option value='='>=</option>
+                                                                <option value='&lt;'>&lt;</option>
+                                                                <option value='&lt;='>&lt;=</option>
+                                                                <option value='&gt;'>&gt;</option>
+                                                                <option value='&gt;='>&gt;=</option>
+                                                                <option value='LIKE'>contains</option>
+                                                            </select>
+                                                    </td>
+                                                    <td class='tdsearch value'>
+                                                        <input class='txtsearch value n1 fixed' type='text' />
+                                                    </td>
+
+                                                    <td class='tdsearch'>
+                                                        <select class='selectsearch logic groupeend fixed'>
+                                                                <option value=''>&nbsp;</option>
+                                                                <option value=')'>)</option>
+                                                            </select>
+                                                    </td>
+
+                                                    <td class='tdsearch'>
+                                                        <select class='selectsearch logic andor fixed'>
+                                                                <option value='AND'>AND</option>
+                                                                <option value='OR'>OR</option>
+                                                            </select>
+                                                    </td>
+
+                                                    <td class='tdsearch '>
+                                                        <div class='button2 add'>&nbsp;+&nbsp;</div>
+                                                    </td>
+                                                    <td class='tdsearch ' rowspan=100>
+                                                        <div class='button2 search ' style="width:120px">Search</div>
+                                                    </td>
+
+                                                    <td class='tdcoulmns-display' rowspan=2>
+                                                        <table>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class='tdlisth CN0 bordertopton' data-display=1 data-colnum=0>No.</td>
+                                                                    <td class='tdlisth CN1 bordertopton' data-display=1 data-colnum=1>ID</td>
+                                                                    <td class='tdlisth CN2 bordertopton' data-display=1 data-colnum=2>Name</td>
+                                                                    <td class='tdlisth CN3 bordertopton' data-display=1 data-colnum=3>Module</td>
+                                                                    <td class='tdlisth CN4 bordertopton' data-display=1 data-colnum=4>Type</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class='tdlisth CN5 borderlefton' data-display=1 data-colnum=5>Steps</td>
+                                                                    <td class='tdlisth CN6' data-display=1 data-colnum=6>Status</td>
+                                                                    <td class='tdlisth CN7' data-display=1 data-colnum=7>Created By</td>
+                                                                    <td class='tdlisth CN8' data-display=1 data-colnum=8>Updated By</td>
+                                                                    <td class='tdlisth CN9' data-display=1 data-colnum=9>Updated Date</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class='tdlistspace s2' colspan='11'>
+                                <div class='tdlistspace'>&nbsp;</div>
+                            </td>
+                        </tr>
+                    </thead>
+                </table>
+
+                <div ><span class='span_status'></span><span class='span_select_status'></span></div>
+
+                <table class="table_headers">
+                    <thead>
+                        <tr class='header' style='background:#F0F0F0'>
+                            <td class='tdlisth CN0 bordertopton'>No.</td>
+                            <td class='tdlisth CN1 bordertopton'>ID</td>
+                            <td class='tdlisth CN2 bordertopton'>Name</td>
+                            <td class='tdlisth CN3 bordertopton'>Module</td>
+                            <td class='tdlisth CN4 bordertopton'>Type</td>
+                            <td class='tdlisth CN5 bordertopton'>Steps</td>
+                            <td class='tdlisth CN6 bordertopton'>Status</td>
+                            <td class='tdlisth CN7 bordertopton'>Created By</td>
+                            <td class='tdlisth CN8 bordertopton'>Updated By</td>
+                            <td class='tdlisth CN9 bordertopton'>Updated Date</td>
+                            <td class='tdlisth CN10 bordertopton'>&nbsp;</td>
+                        </tr>
+
+                        <tr class='filter'>
+                            <td class='tdlistFilter CN0 borderlefton' title="Filters">F.</td>
+                            <td class='tdlistFilter CN1'><input class='txtListFilter idx' type='text' /></td>
+                            <td class='tdlistFilter CN2'><input class='txtListFilter name' type='text' /></td>
+                            <td class='tdlistFilter CN3'><input class='txtListFilter module' type='text' /></td>
+                            <td class='tdlistFilter CN4'><input class='txtListFilter type2' type='text' /></td>
+                            <td class='tdlistFilter CN5'><input class='txtListFilter steps' type='text' /></td>
+                            <td class='tdlistFilter CN6'><input class='txtListFilter status' type='text' /></td>
+                            <td class='tdlistFilter CN7'><input class='txtListFilter createdby' type='text' /></td>
+                            <td class='tdlistFilter CN8'><input class='txtListFilter by' type='text' /></td>
+                            <td class='tdlistFilter CN9'><input class='txtListFilter when' type='text' /></td>
+                            <td class='tdlistFilter CN10'>&nbsp;</td>
+                        </tr>
+
+                        <tr class='filter2'>
+                            <td class='tdlistFilter CN0 borderlefton'>
+                                <div class='divline'>&nbsp;</div>
+                            </td>
+                            <td class='tdlistFilter CN1'>
+                                <div class='divline'>&nbsp;</div>
+                            </td>
+                            <td class='tdlistFilter CN2'>
+                                <div class='divline'>&nbsp;</div>
+                            </td>
+                            <td class='tdlistFilter CN3'>
+                                <div class='divline'>&nbsp;</div>
+                            </td>
+                            <td class='tdlistFilter CN4'>
+                                <div class='divline'>&nbsp;</div>
+                            </td>
+                            <td class='tdlistFilter CN5'>
+                                <div class='divline'>&nbsp;</div>
+                            </td>
+                            <td class='tdlistFilter CN6'>
+                                <div class='divline'>&nbsp;</div>
+                            </td>
+                            <td class='tdlistFilter CN7'>
+                                <div class='divline'>&nbsp;</div>
+                            </td>
+                            <td class='tdlistFilter CN8'>
+                                <div class='divline'>&nbsp;</div>
+                            </td>
+                            <td class='tdlistFilter CN9'>
+                                <div class='divline'>&nbsp;</div>
+                            </td>
+                            <td class='tdlistFilter CN10'>
+                                <div class='divline'>&nbsp;</div>
+                            </td>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <div id='divList_list' style='padding:0px 5px 5px 5px'>List</div>
+    </div>
+
+    <div class='divcontent' id='divTCPreview'>
+        <div class='title' style='padding:5px;background:#E0E0E0;text-align: center;font-weight: bold;'>Preview Title</div>
+        <div class='content' style='padding:5px'>Preview Contents</div>
+    </div>
+
+    <div class='divcontent' id='divTestcase'>
+        <div id='divTestcase_prerequisites' style='padding:5px;background:#FFFFFF;display:none'>
+            <table style="width:100%">
+                <tr class="title">
+                    <td>
+                        <div class="title left" style='padding:5px'>Prerequisites</div>
+                    </td>
+                    <td>
+                        <div class="title right" style='padding:5px'>Coverage Area</div>
+                    </td>
+                </tr>
+                <tr class="content">
+                    <td class='left'>
+                        <div class="divCoverage content">
+                            <textarea class='cfont prere' style="border-style: none;" title='Hot keys:&#10 [Alt + i] Indent the selected line&#10 [Alt + u] Unindent the selected line'></textarea>
+                        </div>
+                    </td>
+                    <td class='right'>
+                        <div class="divCoverage content">
+                            <textarea class='cfont coverage' style="border-style: none;" title='Hot keys:&#10 [Alt + i] Indent the selected line&#10 [Alt + u] Unindent the selected line'></textarea>
+
+                            <div class="divCoverageDetail" id='divCoverageDetail'>
+                                <div class='list storylist'>List</div>
+                                <div class='titlex' style='padding:5px;background:#F0F0F0;text-align: center;height: 25px;' title='click to add Story'>
+                                    Story Coverage Detail (+)
+                                </div>
+                                <div class='contentx' style='padding:5px;overflow:auto'></div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div id='divTestcase_steps' style='padding:5px;background:#FFFFFF'>
+            <div id='divStepsHeader' style='overflow:hidden'>
+                <table>
+                    <tr class='trheader' style='height: 40px;font-weight: bold;'>
+                        <td class='CN0 tdsteps number DBL bordertopton' title="Double-click to expand all columns">
+                            <div>No.</div>
+                        </td>
+                        <td class='CN1 tdsteps desc DBL bordertopton' title="Double-click to expand all in the column">
+                            <div>Description</div>
+                        </td>
+                        <td class='CN2 tdsteps expected DBL bordertopton' title="Double-click to expand all in the column">
+                            <div>Expected Result</div>
+                        </td>
+                        <td class='CN3 tdsteps addstep bordertopton' title='Add new step after last row;&#10 Click a row to insert a new row after that row'>
+                            <div>&nbsp;+&nbsp;</div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id='divAllSteps' style='overflow:auto;'>
+                <table>
+                    <tr class='trstep S1' data-num=1>
+                        <td class='tdsteps number borderlefton' style='width: 100px;' title="Double-click to expand all in the row">
+                            <div style='width:100%;'><input class='txtStepNum' type='text' value="Step-1" data-rownum=1 /></div>
+                        </td>
+                        <td class='tdsteps desc'>
+                            <div style='width:100%;'><textarea class='textarea_steps cfont C1' data-colnum=1 data-rownum=1></textarea></div>
+                        </td>
+                        <td class='tdsteps expected'>
+                            <div style='width:100%;'><textarea class='textarea_steps cfont C2' data-colnum=2 data-rownum=1></textarea></div>
+                        </td>
+                        <td class='tdsteps cfont' style='width: 50px;'>
+                            <div style='width:100%;'>&nbsp;</div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div id='divTestcase_history' style='padding:5px;background:#FFFFFF;display:none'></div>
+    </div>
+
+    <div class='div_status_bar' id='div_status_bar'></div>
+
+    <div class='div_user' id='divMyAccount'>
+        <div class='titlex' style='padding:0px;background:#303030;color:#FFFFFF;text-align: center;font-weight: bold;height: 50px;line-height:50px;'>Account</div>
+        <div class='contentx' style='padding:5px;overflow:auto;'></div>
+    </div>
+</body>
+
+
+<script src='index20200914.js' type='text/javascript'></script>
+<script src='Code20200727.js' type='text/javascript'></script>
+
+
+</html>

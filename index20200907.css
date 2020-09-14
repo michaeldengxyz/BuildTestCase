@@ -1,0 +1,754 @@
+html,
+body {
+    height: auto;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0px;
+    border-style: none
+}
+
+td,
+tr {
+    border-style: none;
+    padding: 0px;
+    margin: 0px;
+    color: #707070;
+}
+
+.trheader {
+    background: #E0E0E0;
+}
+
+.teamsTable tr {
+    table-layout: fixed;
+    word-break: break-all;
+    word-wrap: break-word;
+    border-collapse: collapse;
+    border-spacing: 0px;
+    width: 100%;
+}
+
+.teamsTable td.CN0 {
+    width: 60px;
+}
+
+.teamsTable td.CN1 {
+    width: 40px;
+}
+
+.teamsTable td.CN3 {
+    width: 150px;
+}
+
+select,
+option {
+    padding: 5px;
+}
+
+.topbar1 {
+    border-style: none;
+    overflow: visible;
+    padding: 0px;
+    margin: 0px;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    height: 50px;
+    background: #303030;
+    z-index: 100;
+}
+
+.right-click-menu {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #E0E0E0;
+    padding: 0px;
+    margin: 0px;
+    position: fixed;
+    background: #F0F0F0;
+    top: 0px;
+    z-index: 10000;
+}
+
+.span-chkbox {
+    border-style: solid;
+    border-width: 1px;
+    padding: 1px 3px 1px 3px;
+    margin: 0px;
+    font-size: x-small;
+}
+
+.divcontent {
+    border-style: none;
+    padding: 0px;
+    margin: 0px;
+    position: fixed;
+    top: 50px;
+    bottom: 0px;
+    width: 100%;
+    overflow: auto;
+    background: #FFFFFF;
+}
+
+.tdbutton {
+    padding: 5px;
+    border-style: none;
+    color: #FFFFFF;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 38px;
+    background: #303030;
+    cursor: pointer;
+    width: 60px;
+}
+
+.tdbutton2 {
+    padding: 5px;
+    border-style: none;
+    color: #FFFFFF;
+    text-align: center;
+    vertical-align: middle;
+    background: #303030;
+    cursor: pointer;
+}
+
+.tdbutton3 {
+    padding: 5px;
+    border-style: none;
+    color: #FFFFFF;
+    text-align: center;
+    vertical-align: middle;
+    background: #303030;
+    cursor: pointer;
+    width: 60px;
+}
+
+.tdsteps {
+    text-align: center;
+    padding: 0px;
+    border-style: none solid solid none;
+    border-width: 1px;
+    border-color: #D0D0D0;
+}
+
+.tdlisth {
+    text-align: center;
+    padding: 5px;
+    border-style: none solid solid none;
+    border-width: 1px;
+    border-color: #D0D0D0;
+    font-weight: bold;
+}
+
+.tdlist {
+    text-align: left;
+    padding: 8px 5px 8px 5px;
+    border-style: none solid solid none;
+    border-width: 1px;
+    border-color: #D0D0D0;
+}
+
+.tdlistspace {
+    padding: 0px;
+    border-style: none;
+    height: 5px;
+    overflow: hidden;
+}
+
+.tdlistFilter {
+    text-align: center;
+    padding: 0px;
+    border-style: none solid solid none;
+    border-width: 1px;
+    border-color: #D0D0D0;
+}
+
+.tdteam {
+    text-align: center;
+    padding: 5px;
+    border-style: none solid solid none;
+    border-width: 1px;
+    border-color: #EEEEEE;
+}
+
+.tdpreview {
+    text-align: left;
+    padding: 5px;
+    border-style: none solid solid none;
+    border-width: 1px;
+    border-color: #D0D0D0;
+}
+
+.tdtitle {
+    padding: 5px;
+    border-style: none;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 38px;
+    background: #D0D0D0
+}
+
+.tdsearch {
+    padding: 5px;
+    border-style: none;
+}
+
+.tdliststoryN {
+    padding: 5px;
+    border-style: none;
+    color: #E0E0E0
+}
+
+.tdliststoryT {
+    padding: 5px;
+    border-style: none;
+}
+
+.div_status_bar {
+    border-style: none;
+    padding: 0px;
+    margin: 0px;
+    position: fixed;
+    top: 50px;
+    right: 0px;
+    background: 'yellow';
+    z-index: 20000;
+    display: none;
+    text-align: center;
+}
+
+.div_user {
+    border-style: none;
+    padding: 0px;
+    margin: 0px;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    background: #FFFFFF;
+    z-index: 3000;
+    text-align: center;
+    display: none;
+}
+
+.div_story {
+    border-style: none;
+    padding: 0px;
+    margin: 0px;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    background: #FFFFFF;
+    z-index: 3000;
+    text-align: center;
+}
+
+.divStoryList {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #909090;
+    padding: 5px;
+    position: absolute;
+    background: #F0F0F0;
+    display: none;
+    overflow: auto;
+}
+
+.txttitle {
+    border-style: none;
+    padding: 0px 15px 0px 15px;
+    line-height: 38px;
+    width: 100px;
+    background: #D0D0D0;
+    font-weight: bold;
+}
+
+.txtStepNum {
+    border-style: none;
+    padding: 5px;
+    line-height: 80px;
+    width: 100px;
+    text-align: center;
+    height: 80px;
+}
+
+.txtfilter {
+    border-style: none;
+    padding: 5px;
+    line-height: 25px;
+    width: 500px;
+    text-align: left;
+    height: 25px;
+}
+
+.txtStoryID {
+    border-style: none;
+    padding: 5px;
+    line-height: 25px;
+    text-align: left;
+    height: 25px;
+}
+
+.txtListFilter {
+    border-style: none;
+    padding: 5px;
+    line-height: 15px;
+    text-align: left;
+    height: 15px;
+    width: 20px;
+}
+
+.txtListName {
+    border-style: none;
+    padding: 5px;
+    line-height: 15px;
+    text-align: left;
+    height: 15px;
+    width: 20px;
+}
+
+.txtListModule {
+    border-style: none;
+    padding: 5px;
+    line-height: 15px;
+    text-align: center;
+    height: 15px;
+    width: 20px;
+    display: none;
+}
+
+.txtfilter_copy {
+    padding: 5px;
+    width: 120px;
+    text-align: left;
+    border-style: none solid solid solid;
+    border-width: 1px;
+    border-color: #D0D0D0;
+}
+
+.txtteam {
+    padding: 5px;
+    width: 300px;
+    text-align: center;
+    border-style: none;
+}
+
+.txtsearch {
+    padding: 5px;
+    width: 300px;
+    text-align: left;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #F0F0F0;
+}
+
+.txtTeamConfirmcode {
+    padding: 5px;
+    width: 100px;
+    text-align: center;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #A0A0A0;
+}
+
+.txtunderline {
+    padding: 5px;
+    text-align: center;
+    border-style: none none solid none;
+    border-width: 1px;
+    border-color: #A0A0A0;
+}
+
+.txtTeamName {
+    padding: 5px;
+    text-align: left;
+    border-style: none;
+    border-width: 1px;
+    border-color: #A0A0A0;
+    width: 200px;
+    font-weight: bold;
+}
+
+.selectsearch {
+    padding: 5px;
+    text-align: left;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #F0F0F0;
+}
+
+#sel_copy_idxs {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #D0D0D0;
+}
+
+textarea {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #D0D0D0;
+    padding: 5px;
+    font-family: Consolas, "Literation Mono", Menlo, 'Courier New', Courier, monospace;
+    color: #000000;
+}
+
+.textarea_steps {
+    border-style: none;
+    padding: 5px;
+    width: 300px;
+    height: 80px;
+}
+
+.cfont {
+    font-size: normal;
+}
+
+.div_count_down {
+    border-style: solid none none none;
+    border-width: 4px;
+    border-color: #303030;
+    height: 0px;
+    width: 100%' 
+
+}
+
+.divMore {
+    border-style: none;
+    padding: 1px;
+    margin: 0px;
+    position: absolute;
+    top: 50px;
+    text-align: center;
+    display: none
+}
+
+.div_count_down1 {
+    border-style: solid none none none;
+    border-width: 1px;
+    border-color: #FFFFFF;
+    height: 0px;
+    width: 100%' 
+
+}
+
+.div_count_down2 {
+    border-style: solid none none none;
+    border-width: 1px;
+    border-color: #E0E0E0;
+    height: 0px;
+    width: 100%' 
+
+}
+
+.divcopy {
+    border-style: none;
+    padding: 0px;
+    margin: 0px;
+    position: fixed;
+    top: 50px;
+    right: 0px;
+    left: 0px;
+    background: #f0f0f0;
+    z-index: 500;
+    text-align: center;
+    display: none
+}
+
+.divsmart {
+    border-style: none;
+    padding: 0px;
+    margin: 0px;
+    position: fixed;
+    background: #A0A0A0;
+    z-index: 1000;
+    text-align: center;
+    color: #303030;
+    display: none;
+}
+
+.richtext {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #E0E0E0;
+    resize: both;
+    padding: 5px;
+    color: #000000;
+}
+
+.divfindings {
+    overflow: auto;
+}
+
+.divfinding {
+    text-align: left;
+    padding: 5px;
+    font-size: small;
+    color: #000000;
+}
+
+.xbg {
+    background: #f4f4f4;
+}
+
+.xbg2 {
+    background: #D0D0D0;
+}
+
+.xbg3 {
+    background: #F4F4F4;
+    color: #D0D0D0
+}
+
+.span_status {
+    font-size: small;
+    color: #a0a0a0;
+    ;
+    padding: 5px;
+}
+
+.span_select_status {
+    font-size: small;
+    color: #a0a0a0;
+    ;
+    padding: 5px;
+}
+
+.divCoverage {
+    text-align: left;
+    padding: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #D0D0D0;
+    overflow: auto;
+}
+
+.divCoverageDetail {
+    text-align: left;
+    padding: 0px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #E0E0E0;
+    overflow: auto;
+    position: relative;
+}
+
+.contentxStory {
+    border-style: none solid solid solid;
+    border-width: 1px;
+    border-color: #D0D0D0;
+}
+
+.contentxStory1 {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #D0D0D0;
+}
+
+.storylist {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #909090;
+    padding: 5px;
+    background: #F0F0F0;
+    text-align: left;
+    position: absolute;
+    top: 35px;
+    display: none;
+    overflow: auto;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+::-webkit-scrollbar {
+    height: 5px;
+    width: 5px;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 2px rgba(0, 0, 0, .3);
+    background-color: #555;
+}
+
+.span4 {
+    border-style: none;
+    padding: 2px;
+    margin: 0px;
+    text-align: left;
+    vertical-align: middle;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.button {
+    margin: 0px;
+    height: 30px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(176, 176, 176);
+    padding: 3px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background: #E0E0E0;
+    color: blue
+}
+
+.button2 {
+    padding: 5px;
+    border-style: none;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    color: blue;
+}
+
+.button3 {
+    width: 50px;
+    padding: 5px;
+    border-style: none;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    color: blue;
+}
+
+.button4 {
+    padding: 5px;
+    border-style: none;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    color: blue;
+}
+
+.button5 {
+    width: 50px;
+    height: 25px;
+    line-height: 25px;
+    padding: 5px;
+    border-style: none;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    color: #FFFFFF;
+}
+
+.button6 {
+    margin: 0px;
+    border-style: none;
+    padding: 0px 5px 0px 5px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background: #F0F0F0;
+    height: 28px;
+    line-height: 28px;
+}
+
+.button7 {
+    margin: 0px;
+    border-style: none;
+    padding: 5px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background: #F0F0F0;
+    color: blue
+}
+
+.xclose {
+    padding: 0px;
+    text-align: center;
+    color: #FFFFFF;
+    display: none;
+    cursor: pointer;
+    border-style: none;
+    border-width: 1px;
+    border-color: #A0A0A0;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    z-index: 20000;
+}
+
+.divlogin {
+    text-align: left;
+    padding: 0px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #A0A0A0;
+}
+
+.divlogintitle {
+    padding: 5px;
+    background: #B0B0B0
+}
+
+.divline {
+    border-style: none;
+    height: 1px;
+    overflow: hidden
+}
+
+.IV {
+    visibility: hidden;
+}
+
+.divsearch {
+    text-align: left;
+    padding: 0px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #D0D0D0;
+    display: none;
+}
+
+.borderlefton {
+    border-style: none solid solid solid;
+    border-width: 1px;
+}
+
+.bordernoright {
+    border-style: solid none solid solid;
+    border-width: 1px;
+}
+
+.bordernoleft {
+    border-style: solid solid solid none;
+    border-width: 1px;
+}
+
+.bordertopton {
+    border-style: solid;
+    border-width: 1px;
+}
+
+.bordernone {
+    border-style: none;
+}
+
+.logic {
+    color: #00CCCC;
+}
+
+.ZeroPadding {
+    padding: 0px;
+}
+
+.nowrap {
+    word-wrap: none;
+}
